@@ -60,7 +60,7 @@ int main()
 		return 0;//飛起來到程式關閉 
 	}
 	
-	// 主選單循環
+	// 以下是主選單循環
     char choice;
     int run = 1;
 
@@ -83,8 +83,30 @@ int main()
         choice = getch();
         choice = tolower(choice);
         printf("%c\n", choice);
-	
-	}
-	return 0;
-} 
+        
+        switch (choice)
+        {
+            case 'a':
+            {
+
+            }
+            case 'b':
+            {
+
+            }
+            case 'c':
+            {
+                
+            }
+            default:
+            {
+                printf("無效的選項，請重新輸入。\n");
+                system("pause");
+                break;
+            }
+        }
+    }
+
+    return 0;
+}
 
