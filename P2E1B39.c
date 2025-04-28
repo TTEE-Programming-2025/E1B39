@@ -60,12 +60,13 @@ int main()
 	}
 	
 	//懶得設計了的選單跟所以跟範例一模一樣 
-    printf("-----------------------------\n");
-    printf("|  'A'...'Z' : Uppercase    |\n");
-    printf("|  'a'...'z' : Lowercase    |\n");
-    printf("|  '0'...'9' : Digit        |\n");
-    printf("|  Otherwise : Your name    |\n");
-    printf("-----------------------------\n");
+    printf("--------------------------\n");
+    printf("|   a. 畫出直角三角形    |\n");
+    printf("|   				     |\n");
+    printf("|   b. 顯示乘法表        |\n");
+    printf("|   				     |\n");
+    printf("|   c. 結束              |\n");
+    printf("--------------------------\n");
     printf("Tips：\n");
 	printf("若你輸入大寫字母A~Z，螢幕上會出現Uppercase\n");
 	printf("若你輸入小寫字母a~z，螢幕上會出現Lowercase\n");
