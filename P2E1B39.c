@@ -1,6 +1,7 @@
 #include <stdio.h> 
 #include <stdlib.h>
 #include<conio.h>
+#include <ctype.h>
 int main()
 {
 	//個人風格的畫面
@@ -59,49 +60,31 @@ int main()
 		return 0;//飛起來到程式關閉 
 	}
 	
-	//懶得設計了的選單跟所以跟範例一模一樣 
-    printf("--------------------------\n");
-    printf("|   a. 畫出直角三角形    |\n");
-    printf("|   				     |\n");
-    printf("|   b. 顯示乘法表        |\n");
-    printf("|   				     |\n");
-    printf("|   c. 結束              |\n");
-    printf("--------------------------\n");
-    printf("Tips：\n");
-	printf("若你輸入大寫字母A~Z，螢幕上會出現Uppercase\n");
-	printf("若你輸入小寫字母a~z，螢幕上會出現Lowercase\n");
-	printf("若你輸入數字0~9，螢幕上會出現Digit\n");
-	printf("如果是其他符號字元，螢幕上會出現我的班級座號姓名\n");
-	
-	
-	//要求輸入字元 
-	char character;
-	printf("所以\n請你輸入一個字元:\n");
-	fflush(stdin);//淨空input buffer
-	character=getche();
+	// 主選單循環
+    char choice;
+    int run = 1;
 
-
-	//這區是看你打了啥
-	if(character>='A'&&character<='Z')//判斷大寫英文字母 
-	{
-		printf("\nUppercase\n");//輸出 Uppercase
-	}
+    while (run)
+    {
+        system("cls"); // 每次重新顯示乾淨的選單
+		//懶得設計了的選單跟所以跟範例一模一樣 
+    	printf("--------------------------\n");
+    	printf("|   a. 畫出直角三角形    |\n");
+    	printf("|   				     |\n");
+    	printf("|   b. 顯示乘法表        |\n");
+    	printf("|   				     |\n");
+    	printf("|   c. 結束              |\n");
+    	printf("--------------------------\n");
+    	printf("Tips：\n");
+		printf("請輸入A或a，B或b以繼續 ：\n");
+		printf("若想結束程式請按C或c以結束\n");
+		
+		fflush(stdin);
+        choice = getch();
+        choice = tolower(choice);
+        printf("%c\n", choice);
 	
-	else if(character>='a'&&character<='z')//判斷小寫英文字母 
-	{
-		printf("\nLowercase\n");//輸出 Lowercase
 	}
-	
-	else if(character>='0'&&character<='9')//判斷是不是數字 
-	{
-		printf("\nDigit\n");//輸出 Digit
-	}
-	
-	else//都不是 
-	{
-		printf("\nE1B39\n藍郁棠\n");//輸出我的班級座號姓名
-	}
-	
-	system("pause");
 	return 0;
-}
+} 
+
