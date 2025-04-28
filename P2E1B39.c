@@ -86,9 +86,40 @@ int main()
         
         switch (choice)
         {
+        	system("cls");//清除畫面
             case 'a':
             {
+            	char ch;
+            	system("cls");//清除畫面 
+                while (1) // 進入一個小小的無限迴圈，直到輸入合法才跳出
+    			{
+    				 
+        			printf("請輸入一個小寫字母 (a ~ n)：\n");
+        			fflush(stdin);
+        			ch = getch();
+        			printf("%c\n", ch);
 
+        			if (ch >= 'a' && ch <= 'n')
+        			{
+        				char i;
+            			for ( i = ch; i >= 'a'; i--)// 輸入正確，開始畫三角形
+            			{
+            				char j; 
+                			for ( j = i; j <= ch; j++)
+                			{
+                    			printf("%c", j);
+                			}
+                		printf("\n");
+            			}
+            			break; // 畫完了，跳出 while (1) 迴圈
+        			}
+        			else
+        			{
+            			printf("輸入錯誤！必須是 a 到 n 之間的小寫字母。\n");// 不跳出while(1)，繼續要求重新輸入
+        			}
+    			}
+                system("pause");
+                break;
             }
             case 'b':
             {
