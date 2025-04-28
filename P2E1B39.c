@@ -86,7 +86,6 @@ int main()
         
         switch (choice)
         {
-        	system("cls");//清除畫面
             case 'a':
             {
             	char ch;
@@ -123,11 +122,34 @@ int main()
             }
             case 'b':
             {
-
+            	int n;
+            	system("cls");//清除畫面
+                printf("請輸入乘法表大小(1~9)：\n");
+                scanf("%d", &n);
+                if (n < 1 || n > 9)
+                {
+                    printf("輸入錯誤！必須是1~9之間的數字。\n");
+                    system("pause");
+                    break;
+                }
+                printf("%d×%d乘法表：\n", n, n);
+                int i; 
+                for (i = 1; i <= n; i++)
+                {
+                	int j; 
+                    for (j = 1; j <= n; j++)
+                    {
+                        printf("%2d ", i * j);
+                    }
+                    printf("\n");
+                }
+                system("pause");
+                break;
             }
             case 'c':
             {
-                
+            	system("cls");//清除畫面
+				
             }
             default:
             {
