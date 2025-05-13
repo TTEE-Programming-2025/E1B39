@@ -45,6 +45,58 @@ void displaySeats() {
     }
 }
 
+void Arrange() {
+    int need;
+    printf("How many seats do you need (1-4)? ");
+    scanf("%d", &need);
+
+    int placed = 0;
+    for (i = 0; i < SIZE && !placed; i++) {
+        for (j = 0; j <= SIZE - need; j++) {
+            int ok = 1;
+            int k;
+            for (k = 0; k < need; k++) {
+                if (seats[i][j + k] != '-') {
+                    ok = 0;
+                    break;
+                }
+            }
+            if (ok) {
+                for (k = 0; k < need; k++)
+                    seats[i][j + k] = '@';
+                placed = 1;
+                break;
+            }
+        }
+    }
+
+    if (!placed && need == 4) {
+        for (i = 0; i < SIZE - 1 && !placed; i++) {
+            for (j = 0; j < SIZE; j++) {
+                if (seats[i][j] == '-' && seats[i + 1][j] == '-') {
+                    seats[i][j] = seats[i + 1][j] = '@';
+                    seats[i][(j + 1) % SIZE] = seats[i + 1][(j + 1) % SIZE] = '@';
+                    placed = 1;
+                    break;
+                }
+            }
+        }
+    }
+
+    displaySeats();
+    printf("Are you satisfied? (y/n): ");
+    char response;
+    scanf(" %c", &response);
+    if (response == 'y') {
+        for (i = 0; i < SIZE; i++)
+            for (j = 0; j < SIZE; j++)
+                if (seats[i][j] == '@') seats[i][j] = '*';
+    } else {
+        for (i = 0; i < SIZE; i++)
+            for (j = 0; j < SIZE; j++)
+                if (seats[i][j] == '@') seats[i][j] = '-';
+    }
+}
 
 int main(void)
 {	
@@ -133,7 +185,8 @@ int main(void)
             }
             case 'b':
             {
-            	
+            	Arrange();
+            	break;
             }
             case 'c':
             {
