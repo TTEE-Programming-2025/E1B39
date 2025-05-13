@@ -4,8 +4,51 @@
 #include <ctype.h>
 #include <time.h>   
 #include <string.h> 
+
+#define SIZE 9
+
+char seats[SIZE][SIZE];     // 當前座位狀態
+int i,j; 
+
+void Seats() {
+    // Step 1: 全部初始化為空位 '-'
+
+    for (i=0; i < SIZE; i++) {
+        for (j=0; j < SIZE; j++) {
+            seats[i][j] = '-';
+        }
+    }
+
+    // Step 2: 隨機生成10個 '*'（已預訂座位）
+    int count = 0;
+    while (count < 10) {
+        // 生成隨機行和列（範圍：0~8）
+        int row = rand() % SIZE;
+        int col = rand() % SIZE;
+
+        // 檢查是否已被佔用
+        if (seats[row][col] == '-') {
+            seats[row][col] = '*';
+            count++; // 成功設置後計數
+        }
+    }
+}
+
+void displaySeats() {
+	
+    printf("\\123456789\n");  // 列印列號
+    for (i=0; i<SIZE; i++) {
+        printf("%d", SIZE-i);  // 行號從9到1
+        for (j=0; j<SIZE; j++)
+            printf("%c", seats[i][j]);
+        printf("\n");
+    }
+}
+
+
 int main(void)
-{
+{	
+	srand(time(NULL));
 	//Personal style picture
 	printf("--------------------------------------------------\n");
 	printf("|            　　　　 　　  ＿＿＿               |\n");
@@ -56,11 +99,11 @@ int main(void)
 		return 1;
 	}
  
-	
+	 
 	// Below is the main menu cycle
     char choice;
     int run = 1;
-
+	Seats(); 
     while (run)// End when run=0
     {
         system("cls"); 
@@ -83,7 +126,10 @@ int main(void)
         {
             case 'a':
             {
-            	
+            	displaySeats();
+            	printf("Press any key to return to menu...\n");
+    			getch();
+				break; 
             }
             case 'b':
             {
@@ -109,7 +155,7 @@ int main(void)
                             break; // Exit this loop and return to the main menu
                         } 
                         else {
-                            printf("Invalid input! ");
+                            printf("Invalid input! \n");
                         }
                     }
                 break;
@@ -117,7 +163,8 @@ int main(void)
             default:
             {
                 printf("Invalid option, please re-enter.\n");
-                system("pause");
+                printf("Press any key to return to menu...\n");
+                getch();
                 break;
             }
         }
@@ -125,4 +172,4 @@ int main(void)
 
     return 0;
 }
-
+/*小細節常常讓我 debug 到很頭痛*/
