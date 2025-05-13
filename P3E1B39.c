@@ -98,6 +98,32 @@ void Arrange() {
     }
 }
 
+void userChoose() {
+    int num;
+    printf("How many seats do you want to choose? ");
+    scanf("%d", &num);
+    for (i = 0; i < num; i++) {
+        int row, col;
+        char dash;
+        while (1) {
+            printf("Enter seat (format row-col): ");
+            if (scanf("%d-%d", &row, &col) != 2 || row < 1 || row > 9 || col < 1 || col > 9 || seats[row - 1][col - 1] != '-') {
+                printf("Invalid or already taken. Try again.\n");
+                while (getchar() != '\n');
+            } else {
+                seats[row - 1][col - 1] = '@';
+                break;
+            }
+        }
+    }
+    displaySeats();
+    printf("Press any key to return to menu...\n");
+    getch();
+    for (i = 0; i < SIZE; i++)
+        for (j = 0; j < SIZE; j++)
+            if (seats[i][j] == '@') seats[i][j] = '*';
+}
+
 int main(void)
 {	
 	srand(time(NULL));
@@ -190,7 +216,8 @@ int main(void)
             }
             case 'c':
             {
-            	
+            	userChoose();
+                break;
             }
             case 'd':
             {
