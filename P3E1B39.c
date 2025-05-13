@@ -2,9 +2,11 @@
 #include <stdlib.h>
 #include<conio.h>
 #include <ctype.h>
+#include <time.h>   
+#include <string.h> 
 int main(void)
 {
-	//個人風格的畫面
+	//Personal style picture
 	printf("--------------------------------------------------\n");
 	printf("|            　　　　 　　  ＿＿＿               |\n");
     printf("|             　　　 　　／＞　　  ＞            |\n");
@@ -55,14 +57,13 @@ int main(void)
 	}
  
 	
-	// 以下是主選單循環
+	// Below is the main menu cycle
     char choice;
     int run = 1;
 
-    while (run)// run=0 時結束 
+    while (run)// End when run=0
     {
-        system("cls"); // 每次重新顯示乾淨的選單
-		//懶得設計了的選單跟所以跟範例一模一樣 
+        system("cls"); 
     	printf("----------[Booking System]----------\n");
     	printf("| a. Available seats               |\n");
     	printf("| b. Arrange for you               |\n");
@@ -94,7 +95,23 @@ int main(void)
             }
             case 'd':
             {
-                run = 0;// When run=0, the while (run) loop ends.
+            	char confirm;
+				while(1) {
+                        printf("Continue? (y/n): ");
+                        confirm = tolower(getch());
+                        printf("%c\n", confirm);
+                        
+                        if(confirm == 'n') {
+                            printf("Exiting program...\n");
+                            return 0; // Program ends
+                        } 
+                        else if(confirm == 'y') {
+                            break; // Exit this loop and return to the main menu
+                        } 
+                        else {
+                            printf("Invalid input! ");
+                        }
+                    }
                 break;
             }
             default:
@@ -108,3 +125,4 @@ int main(void)
 
     return 0;
 }
+
