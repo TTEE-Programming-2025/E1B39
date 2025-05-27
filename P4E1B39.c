@@ -20,6 +20,7 @@ int student_count = 0;        // 當前學生數量
 
 // 函式宣告
 void enter_grades();
+void display_grades();
 
 int main(void)
 {	
@@ -102,6 +103,7 @@ int main(void)
                 enter_grades();
                 break;
             case 'b':
+                display_grades();
                 break;
             case 'c':
                 break;
@@ -131,7 +133,7 @@ int main(void)
             default:
             {
                 printf("Invalid option, please re-enter.\n");
-                printf("Press any key to return to menu...");
+                printf("Press any key to return to menu...\n");
                 getch();
                 break;
             }
@@ -213,6 +215,26 @@ void enter_grades() {
     }
     student_count = n;
     printf("\n資料輸入完成！Press any key to return to menu...\n");
+    getch();
+}
+
+void display_grades() {
+    system("cls");
+    printf("=== 顯示所有學生成績 ===\n");
+    
+    if (student_count == 0) {
+        printf("尚無資料！\n");
+    } else {
+    	int i=0;
+        for (i=0; i<student_count; i++) {
+            printf("\n姓名: %s\n", students[i].name);
+            printf("學號: %d\n", students[i].id);
+            printf("數學: %d\t物理: %d\t英語: %d\n", 
+                students[i].math, students[i].physics, students[i].english);
+            printf("平均: %.1f\n", students[i].average);
+        }
+    }
+    printf("\nPress any key to return to menu...");
     getch();
 }
 
