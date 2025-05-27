@@ -22,7 +22,7 @@ int student_count = 0;        // 當前學生數量
 void enter_grades();
 void display_grades();
 void search_grades();
-
+void grade_ranking();
 int main(void)
 {	
 	
@@ -110,6 +110,7 @@ int main(void)
                 search_grades();
                 break;
             case 'd':
+                grade_ranking();
                 break;
             case 'e': 
 			{
@@ -268,4 +269,60 @@ void search_grades()
     printf("\nPress any key to return to menu...");
     getch();
 }
+
+void grade_ranking() 
+{
+    system("cls");
+    printf("=== 成績排名 ===\n");
+    
+    if (student_count == 0) 
+	{
+        printf("尚無資料可排序！\n");
+        getch();
+        return;
+    }
+
+    
+    int i=0;
+    for(i=0; i<student_count-1; i++) 
+	{
+    	int j=0;
+        for(j=0; j<student_count-i-1; j++) 
+		{
+            if(students[j].average < students[j+1].average) 
+			{
+                // 交換結構體內容
+                struct Student temp = students[j];
+                students[j] = students[j+1];
+                students[j+1] = temp;
+            }
+        }
+    }
+
+    // 顯示排序結果
+    printf("排名\t姓名\t\t學號\t平均成績\n");
+
+    for(i=0; i<student_count; i++) 
+	{
+        printf("%d\t%-10s\t%d\t%.1f\n", 
+              i+1, students[i].name, students[i].id, students[i].average);
+    }
+
+    printf("\nPress any key to return to menu...");
+    getch();
+}
+/*=============================================
+			程式設計心得與說明
+	檔案名稱：P4E1B39.c
+	開發者：藍郁棠 (E1B39)
+	最後更新日期：2025/05/27
+=============================================*/
+/*
+本次實作讓我深刻體會到：
+1. 模組化設計的重要性：將功能拆分成函式後，除錯效率大幅提升
+2. 結構體的強大：相較於多個獨立陣列，結構體讓資料管理更直覺
+3. 善用printf()進行除錯
+4. 各種除不完的bug
+5. 寫程式必須休養身心靈 
+*/
 
