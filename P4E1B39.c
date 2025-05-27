@@ -21,6 +21,7 @@ int student_count = 0;        // 當前學生數量
 // 函式宣告
 void enter_grades();
 void display_grades();
+void search_grades();
 
 int main(void)
 {	
@@ -106,6 +107,7 @@ int main(void)
                 display_grades();
                 break;
             case 'c':
+                search_grades();
                 break;
             case 'd':
                 break;
@@ -234,6 +236,35 @@ void display_grades() {
             printf("平均: %.1f\n", students[i].average);
         }
     }
+    printf("\nPress any key to return to menu...");
+    getch();
+}
+void search_grades() 
+{
+	char searchName[50];
+    int found = 0;
+    system("cls");
+    printf("=== 搜尋學生資料 ===\n");
+    printf("請輸入要搜尋的姓名：\n");
+    scanf("%s", searchName);
+    int i=0;
+    for (i = 0; i < student_count; i++) 
+	{
+        if (strcmp(searchName, students[i].name) == 0) 
+		{
+            printf("\n找到學生資料：\n");
+            printf("姓名: %s\n", students[i].name);
+            printf("學號: %d\n", students[i].id);
+            printf("數學: %d\n物理: %d\n英文: %d\n平均: %.1f\n",students[i].math, students[i].physics,students[i].english, students[i].average);
+            found = 1;
+            break;
+        }
+    }
+    
+    if(!found) {
+        printf("\n找不到姓名為 %s 的學生\n",searchName);
+    }
+
     printf("\nPress any key to return to menu...");
     getch();
 }
