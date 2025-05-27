@@ -4,6 +4,23 @@
 #include <ctype.h>
 #include <string.h>
 
+// 學生結構體定義
+struct Student {
+    char name[50];
+    int id;
+    int math;
+    int physics;
+    int english;
+    float average;
+};
+
+// 全局變數
+struct Student students[10]; // 最多存10個學生
+int student_count = 0;        // 當前學生數量
+
+// 函式宣告
+void enter_grades();
+
 int main(void)
 {	
 	
@@ -82,6 +99,7 @@ int main(void)
 
         switch (choice) {
             case 'a':
+                enter_grades();
                 break;
             case 'b':
                 break;
@@ -113,12 +131,88 @@ int main(void)
             default:
             {
                 printf("Invalid option, please re-enter.\n");
-                printf("Press any key to return to menu...\n");
+                printf("Press any key to return to menu...");
                 getch();
                 break;
             }
         }
     }
     return 0;
+}
+
+// 功能函式實現-------------------------------------------------
+void enter_grades() {
+    system("cls");
+    printf("=== 輸入學生資料 ===\n");
+    
+    // 輸入學生人數
+    int n;
+	while (1) 
+	{
+    	printf("請輸入學生人數(5-10): ");
+    
+    	// 檢查輸入是否為有效數字
+    	if (scanf("%d", &n) != 1) 
+		{
+        	// 清空輸入緩衝區
+        	while(getchar() != '\n'); 
+        	printf("錯誤！請輸入數字\n");
+        	continue;
+    	}
+    
+    	// 驗證數字範圍
+    	if (n >=5 && n <=10) 
+		{
+        	break; // 輸入正確，退出迴圈
+    	} else {
+        printf("人數範圍錯誤！請輸入5-10之間的數字\n");
+    	}
+	}
+
+    // 輸入學生資料
+    int i=0; 
+    for (i=0; i<n; i++) {
+        printf("\n學生 #%d\n", i+1);
+        
+        // 輸入姓名
+        printf("姓名: ");
+        while(getchar() != '\n'); // 清空輸入緩衝
+        fgets(students[i].name, 50, stdin);
+        students[i].name[strcspn(students[i].name, "\n")] = '\0'; // 去除換行符
+
+        // 輸入學號
+        while (1) {
+            printf("學號(6位數): ");
+            scanf("%d", &students[i].id);
+            if (students[i].id >= 100000 && students[i].id <= 999999) break;
+            printf("學號必須是6位數字！\n");
+        }
+
+        // 輸入成績
+        while (1) {
+            printf("數學成績(0-100): ");
+            scanf("%d", &students[i].math);
+            if (students[i].math >=0 && students[i].math <=100) break;
+            printf("分數範圍錯誤！\n");
+        }
+        while (1) {
+            printf("物理成績(0-100): ");
+            scanf("%d", &students[i].physics);
+            if (students[i].math >=0 && students[i].math <=100) break;
+            printf("分數範圍錯誤！\n");
+        }
+        while (1) {
+            printf("英文成績(0-100): ");
+            scanf("%d", &students[i].english);
+            if (students[i].math >=0 && students[i].math <=100) break;
+            printf("分數範圍錯誤！\n");
+        }
+        
+        // 計算平均
+        students[i].average = (students[i].math + students[i].physics + students[i].english) / 3.0;
+    }
+    student_count = n;
+    printf("\n資料輸入完成！Press any key to return to menu...\n");
+    getch();
 }
 
